@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>총기 정보 추가</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="my.css">
+    <style>
+        body {
+            background-color: #f5f7fa;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 30px 0;
+            color: #333;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .submit-btn, .cancel-btn {
+            width: 48%;
+            margin-top: 20px;
+        }
+
+        .submit-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .cancel-btn {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+
+        .cancel-btn:hover {
+            background-color: #e53935;
+        }
+    </style>
+    
+    <script>
+        function validateForm() {
+            var gunName = document.forms["gunForm"]["gunName"].value;
+            var manufacturer = document.forms["gunForm"]["manufacturer"].value;
+            var gunType = document.forms["gunForm"]["gunType"].value;
+            var fireRate = document.forms["gunForm"]["fireRate"].value;
+            var caliber = document.forms["gunForm"]["caliber"].value;
+            var weight = document.forms["gunForm"]["weight"].value;
+            var releaseDate = document.forms["gunForm"]["releaseDate"].value;
+            var price = document.forms["gunForm"]["price"].value;
+
+            if (gunName == "") {
+                alert("총기명을 입력하세요.");
+                return false;
+            }
+            if (manufacturer == "") {
+                alert("제조사를 입력하세요.");
+                return false;
+            }
+            if (gunType == "") {
+                alert("총기 유형을 선택하세요.");
+                return false;
+            }
+            if (fireRate == "" || isNaN(fireRate)) {
+                alert("유효한 발사 속도를 입력하세요. 숫자로 입력해주세요.");
+                return false;
+            }
+            if (caliber == "") {
+                alert("구경을 입력하세요.");
+                return false;
+            }
+            if (weight == "" || isNaN(weight)) {
+                alert("유효한 무게를 입력하세요. 숫자로 입력해주세요.");
+                return false;
+            }
+            if (releaseDate == "") {
+                alert("발매일을 입력하세요.");
+                return false;
+            }
+            if (price == "" || isNaN(price)) {
+                alert("유효한 가격을 입력하세요. 숫자로 입력해주세요.");
+                return false;
+            }
+
+            alert("게시물이 추가됩니다.");
+            return true;
+        }
+
+        function cancelForm() {
+            window.location.href = "index.html";
+        }
+    </script>
+</head>
+<body>
+
+    <h1>총기 정보 추가</h1>
+
+    <div class="form-container">
+        <form name="gunForm" onsubmit="return validateForm()">
+            <div class="form-group">
+                <label for="gunName">총기명</label>
+                <input type="text" class="form-control" id="gunName" name="gunName" placeholder="총기명을 입력하세요.">
+            </div>
+
+            <div class="form-group">
+                <label for="manufacturer">제조사</label>
+                <input type="text" class="form-control" id="manufacturer" name="manufacturer" placeholder="제조사를 입력하세요.">
+            </div>
+
+            <div class="form-group">
+                <label for="gunType">총기 유형</label>
+                <select class="form-control" id="gunType" name="gunType">
+                    <option value="">선택하세요</option>
+                    <option value="소총">소총</option>
+                    <option value="권총">권총</option>
+                    <option value="기관단총">기관단총</option>
+                    <option value="산탄총">산탄총</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="fireRate">발사 속도 (발/분)</label>
+                <input type="text" class="form-control" id="fireRate" name="fireRate" placeholder="발사 속도를 입력하세요.">
+            </div>
+
+            <div class="form-group">
+                <label for="caliber">구경 (Caliber)</label>
+                <input type="text" class="form-control" id="caliber" name="caliber" placeholder="구경을 입력하세요.">
+            </div>
+
+            <div class="form-group">
+                <label for="weight">무게 (kg)</label>
+                <input type="text" class="form-control" id="weight" name="weight" placeholder="무게를 입력하세요.">
+            </div>
+
+            <div class="form-group">
+                <label for="releaseDate">발매일 (YYYY-MM-DD)</label>
+                <input type="date" class="form-control" id="releaseDate" name="releaseDate">
+            </div>
+
+            <div class="form-group">
+                <label for="price">가격 (₩)</label>
+                <input type="text" class="form-control" id="price" name="price" placeholder="가격을 입력하세요.">
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="submit-btn btn btn-success">[확인]</button>
+                <button type="button" class="cancel-btn btn btn-danger" onclick="cancelForm()">[취소]</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
+
+
