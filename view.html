@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>총기 정보 보기</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="my.css">
+    <style>
+        .item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .item label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .item span {
+            color: #555;
+        }
+
+        .button-group {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .button-group button {
+            margin: 0 10px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .button-group button:hover {
+            background-color: #45a049;
+        }
+
+        .delete-btn {
+            background-color: #f44336;
+        }
+
+        .delete-btn:hover {
+            background-color: #e53935;
+        }
+
+        .list-btn {
+            background-color: #008CBA;
+        }
+
+        .list-btn:hover {
+            background-color: #007BB5;
+        }
+    </style>
+    <script>
+        function confirmDelete() {
+            var result = confirm("게시물을 삭제할까요?");
+            if (result) {
+                alert("게시물이 삭제되었습니다."); 
+            }
+        }
+
+        function goToEditPage() {
+            window.location.href = "edit.html";  
+        }
+
+        function goToIndexPage() {
+            window.location.href = "index.html";  
+        }
+
+        function goToAddPage() {
+            window.location.href = "add.html"; 
+        }
+    </script>
+</head>
+<body>
+
+    <h1>총기 정보</h1>
+
+    <div class="container">
+        <div class="item">
+            <label>총기명:</label>
+            <span>AK-47</span>
+        </div>
+        <div class="item">
+            <label>제조사:</label>
+            <span>칼라시니코프</span>
+        </div>
+        <div class="item">
+            <label>총기 유형:</label>
+            <span>소총</span>
+        </div>
+        <div class="item">
+            <label>발사 속도:</label>
+            <span>600 발/분</span>
+        </div>
+        <div class="item">
+            <label>구경:</label>
+            <span>7.62mm</span>
+        </div>
+        <div class="item">
+            <label>무게:</label>
+            <span>3.47 kg</span>
+        </div>
+        <div class="item">
+            <label>발매일:</label>
+            <span>1949-06-06</span>
+        </div>
+        <div class="item">
+            <label>가격:</label>
+            <span>₩500,000</span>
+        </div>
+
+        <div style="margin-top: 30px;">
+            <button class="add-btn" onclick="goToAddPage()">[추가]</button>
+            <button class="edit-btn" onclick="goToEditPage()">[수정]</button>
+            <button class="delete-btn" onclick="confirmDelete()">[삭제]</button>
+            <button class="list-btn" onclick="goToIndexPage()">[목록]</button>
+        </div>
+    </div>
+
+</body>
+</html>
