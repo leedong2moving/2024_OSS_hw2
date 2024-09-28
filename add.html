@@ -1,29 +1,80 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>총기 정보 추가</title>
+    <title>Add Weapon Information</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="my.css">
     <style>
         body {
-            background-color: #f5f7fa;
+            background-color: #001F3F;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header-bg {
+            background-image: url('military.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-bottom: 50px;
+        }
+
+        .header-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .blur-container {
+            position: relative;
+            text-align: center;
+            z-index: 1;
+            color: #ffffff;
         }
 
         h1 {
-            text-align: center;
-            margin: 30px 0;
-            color: #333;
+            font-size: 3.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgb(220, 219, 222);
         }
 
         .form-container {
             max-width: 600px;
-            margin: 0 auto;
+            margin: auto;
+            background-color: rgba(0, 31, 63, 0.8);
             padding: 20px;
-            background-color: #fff;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-group label {
+            color: #FFD700;
+        }
+
+        .form-control {
+            background-color: #1b2b4e;
+            color: #fff;
+            border: 1px solid #333;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 0.875rem;
+            margin-top: 5px;
+            display: none; 
         }
 
         .submit-btn, .cancel-btn {
@@ -48,10 +99,26 @@
         .cancel-btn:hover {
             background-color: #e53935;
         }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .form-container {
+                padding: 15px;
+            }
+        }
     </style>
     
     <script>
         function validateForm() {
+            document.querySelectorAll('.error-message').forEach(function (el) {
+                el.style.display = 'none';
+            });
+
+            var isValid = true;
+
             var gunName = document.forms["gunForm"]["gunName"].value;
             var manufacturer = document.forms["gunForm"]["manufacturer"].value;
             var gunType = document.forms["gunForm"]["gunType"].value;
@@ -62,40 +129,46 @@
             var price = document.forms["gunForm"]["price"].value;
 
             if (gunName == "") {
-                alert("총기명을 입력하세요.");
-                return false;
-            }
-            if (manufacturer == "") {
-                alert("제조사를 입력하세요.");
-                return false;
-            }
-            if (gunType == "") {
-                alert("총기 유형을 선택하세요.");
-                return false;
-            }
-            if (fireRate == "" || isNaN(fireRate)) {
-                alert("유효한 발사 속도를 입력하세요. 숫자로 입력해주세요.");
-                return false;
-            }
-            if (caliber == "") {
-                alert("구경을 입력하세요.");
-                return false;
-            }
-            if (weight == "" || isNaN(weight)) {
-                alert("유효한 무게를 입력하세요. 숫자로 입력해주세요.");
-                return false;
-            }
-            if (releaseDate == "") {
-                alert("발매일을 입력하세요.");
-                return false;
-            }
-            if (price == "" || isNaN(price)) {
-                alert("유효한 가격을 입력하세요. 숫자로 입력해주세요.");
-                return false;
+                document.getElementById('gunName-error').style.display = 'block';
+                isValid = false;
             }
 
-            alert("게시물이 추가됩니다.");
-            return true;
+            if (manufacturer == "") {
+                document.getElementById('manufacturer-error').style.display = 'block';
+                isValid = false;
+            }
+
+            if (gunType == "") {
+                document.getElementById('gunType-error').style.display = 'block';
+                isValid = false;
+            }
+
+            if (fireRate == "" || isNaN(fireRate)) {
+                document.getElementById('fireRate-error').style.display = 'block';
+                isValid = false;
+            }
+
+            if (caliber == "") {
+                document.getElementById('caliber-error').style.display = 'block';
+                isValid = false;
+            }
+
+            if (weight == "" || isNaN(weight)) {
+                document.getElementById('weight-error').style.display = 'block';
+                isValid = false;
+            }
+
+            if (releaseDate == "") {
+                document.getElementById('releaseDate-error').style.display = 'block';
+                isValid = false;
+            }
+
+            if (price == "" || isNaN(price)) {
+                document.getElementById('price-error').style.display = 'block';
+                isValid = false;
+            }
+
+            return isValid;
         }
 
         function cancelForm() {
@@ -105,64 +178,74 @@
 </head>
 <body>
 
-    <h1>총기 정보 추가</h1>
+    <div class="header-bg">
+        <div class="blur-container">
+            <h1>Add Weapon Information</h1>
+        </div>
+    </div>
 
     <div class="form-container">
         <form name="gunForm" onsubmit="return validateForm()">
             <div class="form-group">
-                <label for="gunName">총기명</label>
-                <input type="text" class="form-control" id="gunName" name="gunName" placeholder="총기명을 입력하세요.">
+                <label for="gunName">Weapon Name</label>
+                <input type="text" class="form-control" id="gunName" name="gunName" placeholder="Enter the weapon name">
+                <div id="gunName-error" class="error-message">Please enter the weapon name.</div>
             </div>
 
             <div class="form-group">
-                <label for="manufacturer">제조사</label>
-                <input type="text" class="form-control" id="manufacturer" name="manufacturer" placeholder="제조사를 입력하세요.">
+                <label for="manufacturer">Manufacturer</label>
+                <input type="text" class="form-control" id="manufacturer" name="manufacturer" placeholder="Enter the manufacturer">
+                <div id="manufacturer-error" class="error-message">Please enter the manufacturer.</div>
             </div>
 
             <div class="form-group">
-                <label for="gunType">총기 유형</label>
+                <label for="gunType">Weapon Type</label>
                 <select class="form-control" id="gunType" name="gunType">
-                    <option value="">선택하세요</option>
-                    <option value="소총">소총</option>
-                    <option value="권총">권총</option>
-                    <option value="기관단총">기관단총</option>
-                    <option value="산탄총">산탄총</option>
+                    <option value="">Select</option>
+                    <option value="Rifle">Rifle</option>
+                    <option value="Pistol">Pistol</option>
+                    <option value="Submachine Gun">Submachine Gun</option>
+                    <option value="Shotgun">Shotgun</option>
                 </select>
+                <div id="gunType-error" class="error-message">Please select the weapon type.</div>
             </div>
 
             <div class="form-group">
-                <label for="fireRate">발사 속도 (발/분)</label>
-                <input type="text" class="form-control" id="fireRate" name="fireRate" placeholder="발사 속도를 입력하세요.">
+                <label for="fireRate">Rate of Fire (rounds/min)</label>
+                <input type="text" class="form-control" id="fireRate" name="fireRate" placeholder="Enter the rate of fire">
+                <div id="fireRate-error" class="error-message">Please enter a valid rate of fire.</div>
             </div>
 
             <div class="form-group">
-                <label for="caliber">구경 (Caliber)</label>
-                <input type="text" class="form-control" id="caliber" name="caliber" placeholder="구경을 입력하세요.">
+                <label for="caliber">Caliber</label>
+                <input type="text" class="form-control" id="caliber" name="caliber" placeholder="Enter the caliber">
+                <div id="caliber-error" class="error-message">Please enter the caliber.</div>
             </div>
 
             <div class="form-group">
-                <label for="weight">무게 (kg)</label>
-                <input type="text" class="form-control" id="weight" name="weight" placeholder="무게를 입력하세요.">
+                <label for="weight">Weight (kg)</label>
+                <input type="text" class="form-control" id="weight" name="weight" placeholder="Enter the weight">
+                <div id="weight-error" class="error-message">Please enter a valid weight.</div>
             </div>
 
             <div class="form-group">
-                <label for="releaseDate">발매일 (YYYY-MM-DD)</label>
+                <label for="releaseDate">Release Date (YYYY-MM-DD)</label>
                 <input type="date" class="form-control" id="releaseDate" name="releaseDate">
+                <div id="releaseDate-error" class="error-message">Please enter the release date.</div>
             </div>
 
             <div class="form-group">
-                <label for="price">가격 (₩)</label>
-                <input type="text" class="form-control" id="price" name="price" placeholder="가격을 입력하세요.">
+                <label for="price">Price (₩)</label>
+                <input type="text" class="form-control" id="price" name="price" placeholder="Enter the price">
+                <div id="price-error" class="error-message">Please enter a valid price.</div>
             </div>
 
             <div class="d-flex justify-content-between">
-                <button type="submit" class="submit-btn btn btn-success">[확인]</button>
-                <button type="button" class="cancel-btn btn btn-danger" onclick="cancelForm()">[취소]</button>
+                <button type="submit" class="submit-btn btn btn-success">Confirm</button>
+                <button type="button" class="cancel-btn btn btn-danger" onclick="cancelForm()">Cancel</button>
             </div>
         </form>
     </div>
 
 </body>
 </html>
-
-

@@ -1,263 +1,165 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>총기 정보 관리</title>
-
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="my.css">
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f5f7fa;
-        }
-
-        h1 {
-            text-align: center;
-            margin: 20px 0;
-            color: #333;
-        }
-
-        .container {
-            display: flex;
-            flex-grow: 1;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .sidebar {
-            width: 200px;
-            background-color: #333;
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .sidebar ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .sidebar ul li {
-            margin-bottom: 15px;
-        }
-
-        .sidebar ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            display: block;
-            padding: 10px;
-            border-radius: 5px;
-            background-color: #556080;
-            transition: background-color 0.3s;
-        }
-
-        .sidebar ul li a:hover {
-            background-color: #4CAF50;
-        }
-
-        .content {
-            flex-grow: 1;
-            padding: 20px;
-        }
-
-        table {
-            margin: 0 auto;
-            width: 100%;
-            border-collapse: collapse;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        th {
-            background-color: #556080;
-            color: white;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        tr:hover {
-            background-color: #f1f1f1;
-        }
-
-        button {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        .pagination {
-            display: flex;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .pagination a {
-            color: #556080;
-            padding: 10px 15px;
-            margin: 0 5px;
-            border-radius: 5px;
-            text-decoration: none;
-            background-color: #e0e0e0;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .pagination a:hover {
-            background-color: #556080;
-            color: white;
-        }
-
-        .pagination a.active {
-            background-color: #556080;
-            color: white;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .sidebar {
-                width: 100%;
-                text-align: center;
-                margin-bottom: 20px;
-            }
-
-            table, th, td {
-                font-size: 12px;
-            }
-
-            button {
-                font-size: 12px;
-            }
-        }
-    </style>
-</head>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Weapon List</title>
+    
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <link rel="stylesheet" href="my.css">
+    </head>
 <body>
-
-    <h1>총기 정보 관리</h1>
-
-    <div class="container">
-        <nav class="sidebar">
-            <ul>
-                <li><a href="#">메뉴 1</a></li>
-                <li><a href="#">메뉴 2</a></li>
-                <li><a href="#">메뉴 3</a></li>
-                <li><a href="#">메뉴 4</a></li>
-            </ul>
-        </nav>
-
-        <div class="content">
-            <table>
-                <thead>
-                    <tr>
-                        <th>총기명</th>
-                        <th>제조사</th>
-                        <th>총기 유형</th>
-                        <th>발사 속도</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><a href="view.html?gun=AK-47">AK-47</a></td>
-                        <td>Kalashnikov Concern</td>
-                        <td>소총</td>
-                        <td>600발/분</td>
-                    </tr>
-                    <tr>
-                        <td><a href="view.html?gun=M4A1">M4A1</a></td>
-                        <td>Colt</td>
-                        <td>소총</td>
-                        <td>700-950발/분</td>
-                    </tr>
-                    <tr>
-                        <td><a href="view.html?gun=Glock%2017">Glock 17</a></td>
-                        <td>Glock</td>
-                        <td>권총</td>
-                        <td>1,100발/분</td>
-                    </tr>
-                    <tr>
-                        <td><a href="view.html?gun=Desert%20Eagle">Desert Eagle</a></td>
-                        <td>Magnum Research</td>
-                        <td>권총</td>
-                        <td>기본</td>
-                    </tr>
-                    <tr>
-                        <td><a href="view.html?gun=MP5">MP5</a></td>
-                        <td>Heckler & Koch</td>
-                        <td>기관단총</td>
-                        <td>800발/분</td>
-                    </tr>
-                    <tr>
-                        <td><a href="view.html?gun=Remington%20870">Remington 870</a></td>
-                        <td>Remington Arms</td>
-                        <td>산탄총</td>
-                        <td>기본</td>
-                    </tr>
-                    <tr>
-                        <td><a href="view.html?gun=FN%20SCAR-H">FN SCAR-H</a></td>
-                        <td>FN Herstal</td>
-                        <td>소총</td>
-                        <td>600발/분</td>
-                    </tr>
-                    <tr>
-                        <td><a href="view.html?gun=P90">P90</a></td>
-                        <td>FN Herstal</td>
-                        <td>기관단총</td>
-                        <td>900발/분</td>
-                    </tr>
-                    <tr>
-                        <td><a href="view.html?gun=AUG%20A3">AUG A3</a></td>
-                        <td>Steyr</td>
-                        <td>소총</td>
-                        <td>680발/분</td>
-                    </tr>
-                    <tr>
-                        <td><a href="view.html?gun=Beretta%2092FS">Beretta 92FS</a></td>
-                        <td>Beretta</td>
-                        <td>권총</td>
-                        <td>기본</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <button onclick="window.location.href='add.html'">[추가]</button>
-
-            <div class="pagination">
-                <a class="active" href="#">1</a>
-                <a href="#">2</a>
-                <a href="#">3</a>
-            </div>
+    <div class="header-bg">
+        <div class="blur-container">
+            <h1>Weapon List</h1>
+            <h2>Best Options for Your War</h2>
         </div>
     </div>
 
+    <div class="sidebar">
+        <a href="#"><i class="fas fa-home"></i> Home</a>
+        <a href="#"><i class="fas fa-info"></i> About</a>
+        <a href="#"><i class="fas fa-cogs"></i> Service</a>
+        <a href="#"><i class="fas fa-image"></i> Gallery</a>
+        <a href="#"><i class="fas fa-users"></i> Team</a>
+        <a href="#"><i class="fas fa-blog"></i> Blog</a>
+        <a href="#"><i class="fas fa-envelope"></i> Contact</a>
+    </div>
+
+    <div class="dots">
+        <i class="fas fa-ellipsis-v fa-2x" style="color: white;"></i>
+    </div>
+
+    <div class="content">
+        <div class="card">
+            <a href="view.html?gun=AK-47"><img src="ak-47.png" alt="AK-47"></a>
+            <h5><a href="view.html?gun=AK-47">AK-47</a></h5>
+            <p>Manufacturer: Izhevsk Mechanical Plant</p>
+            <p>Type: Rifle</p>
+            <p>Rate of Fire: 600 rounds/min</p>
+            <p>The AK-47 is a gas-operated assault rifle known for its reliability and ease of use.</p>
+        </div>
+        <div class="card">
+            <a href="view.html?gun=M4-Carbine"><img src="m4-carbine.png" alt="M4 Carbine"></a>
+            <h5><a href="view.html?gun=M4-Carbine">M4 Carbine</a></h5>
+            <p>Manufacturer: Colt's Manufacturing Company</p>
+            <p>Type: Rifle</p>
+            <p>Rate of Fire: 700-950 rounds/min</p>
+            <p>The M4 Carbine is a lightweight, air-cooled, gas-operated rifle used by the U.S. military.</p>
+        </div>
+        <div class="card">
+            <a href="view.html?gun=FN-SCAR-L"><img src="fn-scar-l.png" alt="FN SCAR-L"></a>
+            <h5><a href="view.html?gun=FN-SCAR-L">FN SCAR-L</a></h5>
+            <p>Manufacturer: FN Herstal</p>
+            <p>Type: Rifle</p>
+            <p>Rate of Fire: 600-750 rounds/min</p>
+            <p>The FN SCAR-L is a modular rifle designed for a variety of combat scenarios.</p>
+        </div>
+        <div class="card">
+            <a href="view.html?gun=SIG-P320"><img src="sig-p320.png" alt="SIG P320"></a>
+            <h5><a href="view.html?gun=SIG-P320">SIG P320</a></h5>
+            <p>Manufacturer: Sig Sauer</p>
+            <p>Type: Pistol</p>
+            <p>Rate of Fire: 1,200 rounds/min</p>
+            <p>The SIG P320 is a versatile pistol with a modular design for easy customization.</p>
+        </div>
+        <div class="card">
+            <a href="view.html?gun=Steyr-AUG"><img src="steyr-aug.png" alt="Steyr AUG"></a>
+            <h5><a href="view.html?gun=Steyr-AUG">Steyr AUG</a></h5>
+            <p>Manufacturer: Steyr Mannlicher</p>
+            <p>Type: Rifle</p>
+            <p>Rate of Fire: 650 rounds/min</p>
+            <p>The Steyr AUG is an iconic bullpup rifle known for its compact size and accuracy.</p>
+        </div>
+        <div class="card">
+            <a href="view.html?gun=Glock-17"><img src="glock-17.png" alt="Glock 17"></a>
+            <h5><a href="view.html?gun=Glock-17">Glock 17</a></h5>
+            <p>Manufacturer: Glock Ges.m.b.H.</p>
+            <p>Type: Pistol</p>
+            <p>Rate of Fire: 1,200 rounds/min</p>
+            <p>The Glock 17 is a popular semi-automatic pistol used by law enforcement and military worldwide.</p>
+        </div>
+        <div class="card">
+            <a href="view.html?gun=MP5"><img src="mp5.png" alt="MP5"></a>
+            <h5><a href="view.html?gun=MP5">MP5</a></h5>
+            <p>Manufacturer: Heckler & Koch</p>
+            <p>Type: Submachine Gun</p>
+            <p>Rate of Fire: 800 rounds/min</p>
+            <p>The MP5 is a versatile submachine gun known for its accuracy and compact design.</p>
+        </div>
+        <div class="card">
+            <a href="view.html?gun=Barrett-M82"><img src="barrett-m82.png" alt="Barrett M82"></a>
+            <h5><a href="view.html?gun=Barrett-M82">Barrett M82</a></h5>
+            <p>Manufacturer: Barrett Firearms Manufacturing</p>
+            <p>Type: Sniper Rifle</p>
+            <p>Rate of Fire: 1 round per trigger pull</p>
+            <p>The Barrett M82 is a .50 caliber sniper rifle used for long-range engagements.</p>
+        </div>
+        <div class="card">
+            <a href="view.html?gun=Remington-700"><img src="remington-700.png" alt="Remington 700"></a>
+            <h5><a href="view.html?gun=Remington-700">Remington 700</a></h5>
+            <p>Manufacturer: Remington Arms</p>
+            <p>Type: Bolt Action Rifle</p>
+            <p>Rate of Fire: 1 round per trigger pull</p>
+            <p>The Remington 700 is a popular bolt-action rifle known for its accuracy and reliability.</p>
+        </div>
+        <div class="card">
+            <a href="view.html?gun=Springfield-M1A"><img src="springfield-m1a.webp" alt="Springfield M1A"></a>
+            <h5><a href="view.html?gun=Springfield-M1A">Springfield M1A</a></h5>
+            <p>Manufacturer: Springfield Armory</p>
+            <p>Type: Rifle</p>
+            <p>Rate of Fire: 750-800 rounds/min</p>
+            <p>The M1A is a civilian version of the M14 rifle, known for its performance and durability.</p>
+        </div>
+        <div class="card">
+            <a href="view.html?gun=FNP-9"><img src="fnp-9.webp" alt="FNP-9"></a>
+            <h5><a href="view.html?gun=FNP-9">FNP-9</a></h5>
+            <p>Manufacturer: FN Herstal</p>
+            <p>Type: Pistol</p>
+            <p>Rate of Fire: 1,200 rounds/min</p>
+            <p>The FNP-9 is a polymer-framed pistol known for its ergonomic design and reliability.</p>
+        </div>
+        <div class="card">
+            <a href="view.html?gun=CZ-75"><img src="cz-75.webp" alt="CZ-75"></a>
+            <h5><a href="view.html?gun=CZ-75">CZ-75</a></h5>
+            <p>Manufacturer: Česká zbrojovka</p>
+            <p>Type: Pistol</p>
+            <p>Rate of Fire: 1,100 rounds/min</p>
+            <p>The CZ-75 is a classic semi-automatic pistol known for its accuracy and comfortable grip.</p>
+        </div>
+
+        <div class="pagination">
+            <a href="add.html" class="add-button">Add</a>
+            <a href="#">&laquo; Previous</a>
+            <a href="#" class="active">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">Next &raquo;</a>
+        </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <script>
+        const sidebar = document.querySelector('.sidebar');
+        const dots = document.querySelector('.dots');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                sidebar.classList.add('hidden'); 
+                dots.classList.add('show'); 
+            } else {
+                sidebar.classList.remove('hidden'); 
+                dots.classList.remove('show'); 
+            }
+        });
+
+        dots.addEventListener('click', () => {
+            sidebar.classList.toggle('hidden'); 
+        });
+    </script>
 </body>
 </html>
-
-
-

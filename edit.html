@@ -1,30 +1,73 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>총기 정보 수정</title>
+    <title>Edit Weapon Information</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="my.css">
     <style>
         body {
-            background-color: #f5f7fa;
+            background-color: #001F3F;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header-bg {
+            background-image: url('military.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-bottom: 50px;
+        }
+
+        .header-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .blur-container {
+            position: relative;
+            text-align: center;
+            z-index: 1;
+            color: #ffffff;
         }
 
         h1 {
-            margin-top: 30px;
-            margin-bottom: 30px;
-            text-align: center;
-            color: #333;
+            font-size: 3.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgb(220, 219, 222);
         }
 
         .form-container {
             max-width: 600px;
-            margin: 0 auto;
-            background-color: #fff;
+            margin: auto;
+            background-color: rgba(0, 31, 63, 0.8);
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-group label {
+            color: #FFD700;
+        }
+
+        .form-control {
+            background-color: #1b2b4e;
+            color: #fff;
+            border: 1px solid #333;
         }
 
         .submit-btn, .cancel-btn {
@@ -49,6 +92,16 @@
         .cancel-btn:hover {
             background-color: #e53935;
         }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .form-container {
+                padding: 15px;
+            }
+        }
     </style>
 
     <script>
@@ -63,40 +116,39 @@
             var price = document.forms["gunForm"]["price"].value;
 
             if (gunName == "") {
-                alert("총기명을 입력하세요.");
+                alert("Please enter the weapon name.");
                 return false;
             }
             if (manufacturer == "") {
-                alert("제조사를 입력하세요.");
+                alert("Please enter the manufacturer.");
                 return false;
             }
             if (gunType == "") {
-                alert("총기 유형을 선택하세요.");
+                alert("Please select the weapon type.");
                 return false;
             }
             if (fireRate == "" || isNaN(fireRate)) {
-                alert("유효한 발사 속도를 입력하세요. 숫자로 입력해주세요.");
+                alert("Please enter a valid rate of fire.");
                 return false;
             }
             if (caliber == "") {
-                alert("구경을 입력하세요.");
+                alert("Please enter the caliber.");
                 return false;
             }
             if (weight == "" || isNaN(weight)) {
-                alert("유효한 무게를 입력하세요. 숫자로 입력해주세요.");
+                alert("Please enter a valid weight.");
                 return false;
             }
             if (releaseDate == "") {
-                alert("발매일을 입력하세요.");
+                alert("Please enter the release date.");
                 return false;
             }
             if (price == "" || isNaN(price)) {
-                alert("유효한 가격을 입력하세요. 숫자로 입력해주세요.");
+                alert("Please enter a valid price.");
                 return false;
             }
 
-            var confirmEdit = confirm("게시물을 수정할까요?");
-            return confirmEdit;
+            return confirm("Are you sure you want to update the weapon information?");
         }
 
         function cancelEdit() {
@@ -106,58 +158,62 @@
 </head>
 <body>
 
-    <h1>총기 정보 수정</h1>
+    <div class="header-bg">
+        <div class="blur-container">
+            <h1>Edit Weapon Information</h1>
+        </div>
+    </div>
 
     <div class="form-container">
         <form name="gunForm" onsubmit="return validateForm()">
             <div class="form-group">
-                <label for="gunName">총기명</label>
+                <label for="gunName">Weapon Name</label>
                 <input type="text" class="form-control" id="gunName" name="gunName" value="AK-47">
             </div>
 
             <div class="form-group">
-                <label for="manufacturer">제조사</label>
-                <input type="text" class="form-control" id="manufacturer" name="manufacturer" value="칼라시니코프">
+                <label for="manufacturer">Manufacturer</label>
+                <input type="text" class="form-control" id="manufacturer" name="manufacturer" value="Kalashnikov Concern">
             </div>
 
             <div class="form-group">
-                <label for="gunType">총기 유형</label>
+                <label for="gunType">Weapon Type</label>
                 <select class="form-control" id="gunType" name="gunType">
-                    <option value="소총" selected>소총</option>
-                    <option value="권총">권총</option>
-                    <option value="기관단총">기관단총</option>
-                    <option value="산탄총">산탄총</option>
+                    <option value="Rifle" selected>Rifle</option>
+                    <option value="Pistol">Pistol</option>
+                    <option value="Submachine Gun">Submachine Gun</option>
+                    <option value="Shotgun">Shotgun</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label for="fireRate">발사 속도 (발/분)</label>
+                <label for="fireRate">Rate of Fire (rounds/min)</label>
                 <input type="text" class="form-control" id="fireRate" name="fireRate" value="600">
             </div>
 
             <div class="form-group">
-                <label for="caliber">구경 (Caliber)</label>
+                <label for="caliber">Caliber</label>
                 <input type="text" class="form-control" id="caliber" name="caliber" value="7.62mm">
             </div>
 
             <div class="form-group">
-                <label for="weight">무게 (kg)</label>
+                <label for="weight">Weight (kg)</label>
                 <input type="text" class="form-control" id="weight" name="weight" value="3.47">
             </div>
 
             <div class="form-group">
-                <label for="releaseDate">발매일 (YYYY-MM-DD)</label>
+                <label for="releaseDate">Release Date (YYYY-MM-DD)</label>
                 <input type="date" class="form-control" id="releaseDate" name="releaseDate" value="1949-06-06">
             </div>
 
             <div class="form-group">
-                <label for="price">가격 (₩)</label>
+                <label for="price">Price (₩)</label>
                 <input type="text" class="form-control" id="price" name="price" value="500000">
             </div>
 
             <div class="d-flex justify-content-between">
-                <button type="submit" class="submit-btn btn btn-success">[확인]</button>
-                <button type="button" class="cancel-btn btn btn-danger" onclick="cancelEdit()">[취소]</button>
+                <button type="submit" class="submit-btn btn btn-success">Confirm</button>
+                <button type="button" class="cancel-btn btn btn-danger" onclick="cancelEdit()">Cancel</button>
             </div>
         </form>
     </div>

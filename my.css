@@ -1,142 +1,197 @@
+/* Common Styles */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    overflow-x: hidden;
+    background-color: #001F3F;
+}
+
+.header-bg {
+    background-image: url('military.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    margin-top: 0;
+}
+
+.header-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.blur-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+    backdrop-filter: blur(10px);
     padding: 20px;
-    background-color: #f5f7fa;
+    z-index: 1;
 }
 
 h1 {
-    color: #333;
+    font-size: 4rem;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgb(220, 219, 222);
+}
+
+h2 {
+    font-size: 2rem;
+    color: #FFD700;
+    margin-top: 10px;
+}
+
+.sidebar {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    z-index: 1000;
+}
+
+.sidebar.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar a i {
+    margin-right: 5px;
+    font-size: 1.2em;
+    color: #FFD700;
+}
+
+.sidebar a:hover {
+    color: #FFD700;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Content and Card Styles */
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    margin-top: 100px;
+    justify-content: space-between;
+}
+
+.card {
+    flex: 0 1 calc(33.33% - 20px);
+    background-color: rgba(15, 39, 63, 0.9);
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow-x: auto;
+.card img {
+    max-width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.card h5 {
+    margin: 10px 0;
+    color: #FFD700;
+    font-size: 1.5rem;
+    border-bottom: 2px solid #FFD700;
+    padding-bottom: 10px;
+}
+
+.card p {
+    color: white;
+}
+
+.dots {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.dots.show {
     display: block;
 }
 
-th, td {
-    padding: 12px 15px;
-    text-align: left;
-    border-bottom: 1px solid #e0e0e0;
-    white-space: nowrap;
-}
-
-th {
-    background-color: #556080;
-    color: white;
-}
-
-tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-tr:hover {
-    background-color: #f1f1f1;
-}
-
-button {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    margin-top: 20px;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #45a049;
-}
-
+/* Pagination */
 .pagination {
     display: flex;
+    align-items: center;
     justify-content: center;
     padding: 20px;
 }
 
 .pagination a {
-    color: #556080;
+    color: #033263;
     padding: 10px 15px;
     margin: 0 5px;
     border-radius: 5px;
     text-decoration: none;
-    background-color: #e0e0e0;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    background-color: #fff;
+    border: 1px solid #183553;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .pagination a:hover {
-    background-color: #556080;
+    background-color: #0d1b29;
     color: white;
 }
 
 .pagination a.active {
-    background-color: #556080;
+    background-color: #0653a5;
     color: white;
 }
 
-@media (max-width: 768px) {
-    body {
-        padding: 10px;
-    }
-
-    h1 {
-        font-size: 20px;
-    }
-
-    table, th, td {
-        font-size: 12px;
-    }
-
-    table {
-        display: block;
-        width: 100%;
-        overflow-x: auto;
-        white-space: nowrap;
-    }
-
-    button {
-        font-size: 12px;
-        padding: 8px 16px;
-        width: 100%; 
-    }
-
-    .pagination a {
-        padding: 8px 10px;
-        margin: 0 2px;
-        font-size: 12px;
+@media (max-width: 992px) {
+    .card {
+        flex: 0 1 calc(50% - 20px);
     }
 }
 
-@media (max-width: 480px) {
-    body {
-        padding: 5px;
+@media (max-width: 576px) {
+    .card {
+        flex: 0 1 100%;
     }
+}
 
-    h1 {
-        font-size: 18px;
-    }
-
-    table, th, td {
-        font-size: 10px;
-    }
-
-    button {
-        font-size: 10px;
-        padding: 6px 12px;
-    }
-
-    .pagination a {
-        padding: 6px 8px;
-        margin: 0 1px;
-        font-size: 10px;
+@media (max-width: 768px) {
+    .sidebar {
+        flex-direction: column;
+        position: relative;
+        top: auto;
     }
 }

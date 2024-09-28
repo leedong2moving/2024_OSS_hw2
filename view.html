@@ -1,51 +1,121 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>총기 정보 보기</title>
+    <title>Weapon Information</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="my.css">
     <style>
+        body {
+            background-color: #001F3F;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header-bg {
+            background-image: url('military.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 60vh; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-bottom: 50px;
+        }
+
+        .header-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6); 
+        }
+
+        .blur-container {
+            position: relative;
+            text-align: center;
+            z-index: 1;
+            color: #ffffff;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgb(220, 219, 222);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: #FFD700;
+            margin-top: 10px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .weapon-image {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .weapon-image img {
+            max-width: 400px;
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
         .item {
             display: flex;
             justify-content: space-between;
             margin-bottom: 15px;
             padding: 10px;
             border-bottom: 1px solid #e0e0e0;
+            font-size: 18px;
         }
 
         .item label {
             font-weight: bold;
-            color: #333;
+            color: #FFD700; 
         }
 
         .item span {
-            color: #555;
+            color: #ffffff;
         }
 
         .button-group {
-            margin-top: 30px;
+            margin-top: 40px;
             text-align: center;
         }
 
         .button-group button {
-            margin: 0 10px;
-            padding: 10px 20px;
-            background-color: #4CAF50;
+            margin: 0 15px;
+            padding: 12px 25px;
+            background-color: #044a06;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 16px;
         }
 
         .button-group button:hover {
-            background-color: #45a049;
+            background-color: #066d08;
         }
 
         .delete-btn {
-            background-color: #f44336;
+            background-color: #801109;
         }
 
         .delete-btn:hover {
@@ -53,18 +123,196 @@
         }
 
         .list-btn {
-            background-color: #008CBA;
+            background-color: #044a06;
         }
 
         .list-btn:hover {
-            background-color: #007BB5;
+            background-color: #066d08;
+        }
+
+        @media (max-width: 768px) {
+            .header-bg {
+                height: 40vh;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 1.25rem;
+            }
+
+            .item {
+                font-size: 16px;
+            }
+
+            .weapon-image img {
+                max-width: 300px;
+            }
         }
     </style>
     <script>
+        const weaponsData = {
+    "AK-47": {
+        name: "AK-47",
+        manufacturer: "Kalashnikov Concern",
+        type: "Rifle",
+        rateOfFire: "600 rounds/min",
+        caliber: "7.62mm",
+        weight: "3.47 kg",
+        releaseDate: "1949-06-06",
+        price: "₩500,000",
+        image: "ak-47.png"
+    },
+    "M4-Carbine": {
+        name: "M4 Carbine",
+        manufacturer: "Colt's Manufacturing Company",
+        type: "Rifle",
+        rateOfFire: "700-950 rounds/min",
+        caliber: "5.56mm",
+        weight: "2.88 kg",
+        releaseDate: "1994-01-01",
+        price: "₩600,000",
+        image: "m4-carbine.png"
+    },
+    "FN-SCAR-L": {
+        name: "FN SCAR-L",
+        manufacturer: "FN Herstal",
+        type: "Rifle",
+        rateOfFire: "600-750 rounds/min",
+        caliber: "5.56mm",
+        weight: "3.29 kg",
+        releaseDate: "2009-09-01",
+        price: "₩700,000",
+        image: "fn-scar-l.png"
+    },
+    "SIG-P320": {
+        name: "SIG P320",
+        manufacturer: "Sig Sauer",
+        type: "Pistol",
+        rateOfFire: "1,200 rounds/min",
+        caliber: "9mm",
+        weight: "0.83 kg",
+        releaseDate: "2014-04-15",
+        price: "₩300,000",
+        image: "sig-p320.png"
+    },
+    "Steyr-AUG": {
+        name: "Steyr AUG",
+        manufacturer: "Steyr Mannlicher",
+        type: "Rifle",
+        rateOfFire: "650 rounds/min",
+        caliber: "5.56mm",
+        weight: "3.3 kg",
+        releaseDate: "1977-09-01",
+        price: "₩800,000",
+        image: "steyr-aug.png"
+    },
+    "Glock-17": {
+        name: "Glock 17",
+        manufacturer: "Glock Ges.m.b.H.",
+        type: "Pistol",
+        rateOfFire: "1,200 rounds/min",
+        caliber: "9mm",
+        weight: "0.62 kg",
+        releaseDate: "1982-01-01",
+        price: "₩400,000",
+        image: "glock-17.png"
+    },
+    "MP5": {
+        name: "MP5",
+        manufacturer: "Heckler & Koch",
+        type: "Submachine Gun",
+        rateOfFire: "800 rounds/min",
+        caliber: "9mm",
+        weight: "2.88 kg",
+        releaseDate: "1966-01-01",
+        price: "₩1,000,000",
+        image: "mp5.png"
+    },
+    "Barrett-M82": {
+        name: "Barrett M82",
+        manufacturer: "Barrett Firearms Manufacturing",
+        type: "Sniper Rifle",
+        rateOfFire: "1 round per trigger pull",
+        caliber: "12.7mm (.50 BMG)",
+        weight: "13.5 kg",
+        releaseDate: "1989-01-01",
+        price: "₩5,000,000",
+        image: "barrett-m82.png"
+    },
+    "Remington-700": {
+        name: "Remington 700",
+        manufacturer: "Remington Arms",
+        type: "Bolt Action Rifle",
+        rateOfFire: "1 round per trigger pull",
+        caliber: "7.62mm",
+        weight: "4.08 kg",
+        releaseDate: "1962-01-01",
+        price: "₩1,200,000",
+        image: "remington-700.png"
+    },
+    "Springfield-M1A": {
+        name: "Springfield M1A",
+        manufacturer: "Springfield Armory",
+        type: "Rifle",
+        rateOfFire: "750-800 rounds/min",
+        caliber: "7.62mm",
+        weight: "4.1 kg",
+        releaseDate: "1974-01-01",
+        price: "₩900,000",
+        image: "springfield-m1a.webp"
+    },
+    "FNP-9": {
+        name: "FNP-9",
+        manufacturer: "FN Herstal",
+        type: "Pistol",
+        rateOfFire: "1,200 rounds/min",
+        caliber: "9mm",
+        weight: "0.72 kg",
+        releaseDate: "2006-01-01",
+        price: "₩380,000",
+        image: "fnp-9.webp"
+    },
+    "CZ-75": {
+        name: "CZ-75",
+        manufacturer: "Česká zbrojovka",
+        type: "Pistol",
+        rateOfFire: "1,100 rounds/min",
+        caliber: "9mm",
+        weight: "1.12 kg",
+        releaseDate: "1975-01-01",
+        price: "₩450,000",
+        image: "cz-75.webp"
+    }
+};
+
+
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const gun = urlParams.get('gun');
+            const weapon = weaponsData[gun];
+
+            if (weapon) {
+                document.getElementById("weapon-name").innerText = weapon.name;
+                document.getElementById("weapon-manufacturer").innerText = weapon.manufacturer;
+                document.getElementById("weapon-type").innerText = weapon.type;
+                document.getElementById("weapon-rate-of-fire").innerText = weapon.rateOfFire;
+                document.getElementById("weapon-caliber").innerText = weapon.caliber;
+                document.getElementById("weapon-weight").innerText = weapon.weight;
+                document.getElementById("weapon-release-date").innerText = weapon.releaseDate;
+                document.getElementById("weapon-price").innerText = weapon.price;
+                document.getElementById("weapon-image").src = weapon.image;
+            } else {
+                alert("Weapon data not found!");
+            }
+        };
+
         function confirmDelete() {
-            var result = confirm("게시물을 삭제할까요?");
+            const result = confirm("Are you sure you want to delete this item?");
             if (result) {
-                alert("게시물이 삭제되었습니다."); 
+                alert("The item has been deleted.");
             }
         }
 
@@ -83,47 +331,57 @@
 </head>
 <body>
 
-    <h1>총기 정보</h1>
+    <div class="header-bg">
+        <div class="blur-container">
+            <h1>Weapon Information</h1>
+            <h2>Details of Selected Weapon</h2>
+        </div>
+    </div>
 
-    <div class="container">
-        <div class="item">
-            <label>총기명:</label>
-            <span>AK-47</span>
-        </div>
-        <div class="item">
-            <label>제조사:</label>
-            <span>칼라시니코프</span>
-        </div>
-        <div class="item">
-            <label>총기 유형:</label>
-            <span>소총</span>
-        </div>
-        <div class="item">
-            <label>발사 속도:</label>
-            <span>600 발/분</span>
-        </div>
-        <div class="item">
-            <label>구경:</label>
-            <span>7.62mm</span>
-        </div>
-        <div class="item">
-            <label>무게:</label>
-            <span>3.47 kg</span>
-        </div>
-        <div class="item">
-            <label>발매일:</label>
-            <span>1949-06-06</span>
-        </div>
-        <div class="item">
-            <label>가격:</label>
-            <span>₩500,000</span>
+    <div class="container content">
+        <div class="weapon-image">
+            <!-- Weapon image added dynamically -->
+            <img id="weapon-image" src="ak-47.png" alt="Weapon Image">
         </div>
 
-        <div style="margin-top: 30px;">
-            <button class="add-btn" onclick="goToAddPage()">[추가]</button>
-            <button class="edit-btn" onclick="goToEditPage()">[수정]</button>
-            <button class="delete-btn" onclick="confirmDelete()">[삭제]</button>
-            <button class="list-btn" onclick="goToIndexPage()">[목록]</button>
+        <div class="item">
+            <label>Weapon Name:</label>
+            <span id="weapon-name"></span>
+        </div>
+        <div class="item">
+            <label>Manufacturer:</label>
+            <span id="weapon-manufacturer"></span>
+        </div>
+        <div class="item">
+            <label>Weapon Type:</label>
+            <span id="weapon-type"></span>
+        </div>
+        <div class="item">
+            <label>Rate of Fire:</label>
+            <span id="weapon-rate-of-fire"></span>
+        </div>
+        <div class="item">
+            <label>Caliber:</label>
+            <span id="weapon-caliber"></span>
+        </div>
+        <div class="item">
+            <label>Weight:</label>
+            <span id="weapon-weight"></span>
+        </div>
+        <div class="item">
+            <label>Release Date:</label>
+            <span id="weapon-release-date"></span>
+        </div>
+        <div class="item">
+            <label>Price:</label>
+            <span id="weapon-price"></span>
+        </div>
+
+        <div class="button-group">
+            <button class="add-btn" onclick="goToAddPage()">Add</button>
+            <button class="edit-btn" onclick="goToEditPage()">Edit</button>
+            <button class="delete-btn" onclick="confirmDelete()">Delete</button>
+            <button class="list-btn" onclick="goToIndexPage()">Back to List</button>
         </div>
     </div>
 
